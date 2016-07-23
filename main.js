@@ -1,39 +1,17 @@
-var prompt = require('prompt');
+var inquirer = require('inquirer');
 var Word = require('./word.js');
 
 prompt.start();
 
-game = {
+function SailorsScouts(words, letters){
+	this.words = words;
+	this.letters = letters;
 
-	sailorScouts : ["Sailor Moon", "Sailor Mercury", "Sailor Mars", "Sailor Venus", "Sailor Jupiter"];
-	Won : 0,
-	guessesLeft : 5,
-	currentWord: null, 
+}
 
-	startGame : function(word){
-
-		this.resetGuessesLeft();
-
-		this.currentWord = new Word(this.sailorScouts[Math.floor(Math.random()* this.sailorScouts.length)]);
-
-		this.keepPromptingUser();
-
-	},
-
-	resetGuessesLeft : function(){
-
-		this.guessesLeft = 5
-	},
-
-	keepPromptingUser : function(){
-
-		var self = this;
-
-		prompt.get(["guessLetter"], function(err, result){
-			console.log (" the letter you guessed is: " + result.guessLetter);
-
-			var findHowManyOfUserGuess = self.currentWord.checkIfLetterFound(result.guessLetter)
-		})
+SailorsScouts.prototype.printInfo = function(){
+	console.log("words:" + this.words + "letters:" + this.letters);
+};
 
 		if(findHowManyOfUserGuess == 0){
 			console.log("Wrong guess!";)
